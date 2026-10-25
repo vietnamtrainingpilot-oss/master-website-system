@@ -1,5 +1,5 @@
 ---
-type: skill
+name: master-website
 description: "Master Website — Autonomous full-stack website production from brief to deployable HTML/CSS/JS/video. Synthesized playbooks with zero content loss from 169 skills + video pipeline."
 ---
 
