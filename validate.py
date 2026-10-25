@@ -1,14 +1,14 @@
 ﻿#!/usr/bin/env python3
 """
-Validation script for Master Website System.
-Run from the product root directory.
+Validation script for Master Website Skill (skill-only structure).
+Run from the skill root directory.
 """
 import os
 import json
 import sys
 from pathlib import Path
 
-PRODUCT_ROOT = Path(__file__).parent
+SKILL_ROOT = Path(__file__).parent
 
 CHECKS = []
 
@@ -21,20 +21,19 @@ def check(name, condition, evidence=""):
 
 def main():
     print("============================================================")
-    print("  Master Website System - Validation")
+    print("  Master Website Skill - Validation (Skill-Only Structure)")
     print("============================================================")
     print()
 
     # 1. Core files exist
     print("Core Implementation:")
-    check("Main SKILL.md exists", (PRODUCT_ROOT / ".opencode/skills/master-website/SKILL.md").exists())
-    check("Command file exists", (PRODUCT_ROOT / ".opencode/commands/master-website.md").exists())
-    check("Skill README exists", (PRODUCT_ROOT / ".opencode/skills/master-website/README.md").exists())
+    check("Main SKILL.md exists", (SKILL_ROOT / "SKILL.md").exists())
+    check("Skill README exists", (SKILL_ROOT / "README.md").exists())
 
-    # 2. SKILL.md size >= 12KB
-    skill_path = PRODUCT_ROOT / ".opencode/skills/master-website/SKILL.md"
+    # 2. SKILL.md size >= 10KB (skill-only is smaller)
+    skill_path = SKILL_ROOT / "SKILL.md"
     skill_size = skill_path.stat().st_size if skill_path.exists() else 0
-    check(f"SKILL.md size >= 12KB ({skill_size/1024:.1f} KB)", skill_size >= 10000)
+    check(f"SKILL.md size >= 10KB ({skill_size/1024:.1f} KB)", skill_size >= 10000)
 
     # 3. Reference library
     print("\nReference Library:")
@@ -49,73 +48,55 @@ def main():
         "hard-gates.md",
     ]
     for ref in refs:
-        check(f"Reference: {ref}", (PRODUCT_ROOT / f".opencode/skills/master-website/references/{ref}").exists())
+        check(f"Reference: {ref}", (SKILL_ROOT / f"references/{ref}").exists())
 
     # 4. Catalogs
     print("\nCatalogs:")
-    check("Design systems AGENTS.md", (PRODUCT_ROOT / ".opencode/skills/master-website/references/design-systems/AGENTS.md").exists())
-    check("Design templates AGENTS.md", (PRODUCT_ROOT / ".opencode/skills/master-website/references/design-templates/AGENTS.md").exists())
+    check("Design systems AGENTS.md", (SKILL_ROOT / "references/design-systems/AGENTS.md").exists())
+    check("Design templates AGENTS.md", (SKILL_ROOT / "references/design-templates/AGENTS.md").exists())
 
-    # 5. Audit artifacts
-    print("\nAudit Artifacts:")
-    check("Enhanced audit JSONL", (PRODUCT_ROOT / "docs/master-website/audit/source-audit-enhanced.jsonl").exists())
-    check("Audit report", (PRODUCT_ROOT / "docs/master-website/audit/source-audit-report.md").exists())
-    check("Validation report", (PRODUCT_ROOT / "docs/master-website/validation-report.md").exists())
+    # 5. Phase files (A-M)
+    print("\nPhase Playbooks:")
+    for phase in "ABCDEFGHIJKLM":
+        phase_file = f"phase-{phase.lower()}-{'intake' if phase=='A' else 'research' if phase=='B' else 'design-direction' if phase=='C' else 'design-system' if phase=='D' else 'template' if phase=='E' else 'implement' if phase=='F' else 'animation' if phase=='G' else 'engineering' if phase=='H' else 'browser' if phase=='I' else 'test' if phase=='J' else 'fix' if phase=='K' else 'deliver' if phase=='L' else 'video'}.md"
+        check(f"Phase {phase} playbook", (SKILL_ROOT / f"references/{phase_file}").exists())
+
+    # 5. Specialty guides
+    print("\nSpecialty Guides:")
+    guides = ["pptx-guide.md", "docs-guide.md", "brand-guide.md", "animation-guide.md", "video-guide.md"]
+    for guide in guides:
+        check(f"Guide: {guide}", (SKILL_ROOT / f"references/{guide}").exists())
+
+    # 6. Source skills reference
+    print("\nSource Skills Reference:")
+    skills_dir = SKILL_ROOT / "references/skills"
+    if skills_dir.exists():
+        skill_count = len([d for d in skills_dir.iterdir() if d.is_dir()])
+        check(f"Source skills count: {skill_count} (expected 169)", skill_count >= 160)
+    else:
+        check("Source skills directory exists", False)
 
     # 6. Installer
     print("\nInstaller:")
-    check("install.ps1 exists", (PRODUCT_ROOT / "install.ps1").exists())
+    check("install.ps1 exists (optional)", (SKILL_ROOT / "install.ps1").exists())
 
-    # 7. Source inventory integrity
-    print("\nSource Inventory:")
-    inv_path = PRODUCT_ROOT / ".opencode/skills/master-website/references/source-inventory.jsonl"
-    if inv_path.exists():
-        with open(inv_path, 'r', encoding='utf-8') as f:
-            lines = sum(1 for _ in f if _.strip())
-        check(f"Inventory entries: {lines} (expected ~5243)", lines >= 5000)
-    else:
-        check("Inventory file exists", False)
-
-    # 8. Enhanced audit integrity
-    print("\nEnhanced Audit:")
-    audit_path = PRODUCT_ROOT / "docs/master-website/audit/source-audit-enhanced.jsonl"
-    if audit_path.exists():
-        with open(audit_path, 'r', encoding='utf-8') as f:
-            audit_lines = sum(1 for _ in f if _.strip())
-        fully_inspected = 0
-        cataloged = 0
-        with open(audit_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if line.strip():
-                    try:
-                        obj = json.loads(line)
-                        if obj.get('inspection_status') == 'FULLY_INSPECTED':
-                            fully_inspected += 1
-                        elif obj.get('inspection_status') == 'CATALOGED':
-                            cataloged += 1
-                    except:
-                        pass
-        check(f"Enhanced audit entries: {audit_lines}", audit_lines >= 5000)
-        check(f"FULLY_INSPECTED skills: {fully_inspected}", fully_inspected >= 30)
-        check(f"CATALOGED systems/templates: {cataloged}", cataloged >= 4000)
-    else:
-        check("Enhanced audit file exists", False)
-
-    # 9. Command file structure
+    # 7. Command Structure
     print("\nCommand Structure:")
-    cmd_path = PRODUCT_ROOT / ".opencode/commands/master-website.md"
+    cmd_path = SKILL_ROOT / "commands/master-website.md"
     if cmd_path.exists():
         content = cmd_path.read_text(encoding='utf-8')
         check("Command has frontmatter", content.startswith("---"))
-        check("Command references $ARGUMENTS", "$ARGUMENTS" in content)
+        check("Command references \$ARGUMENTS", "$ARGUMENTS" in content)
         check("Command invokes skill", "master-website" in content)
+    else:
+        check("Command file exists (optional)", False)
 
-    # 10. SKILL.md structure
+    # 8. Skill Structure
     print("\nSkill Structure:")
-    if skill_path.exists():
-        content = skill_path.read_text(encoding='utf-8')
+    if (SKILL_ROOT / "SKILL.md").exists():
+        content = (SKILL_ROOT / "SKILL.md").read_text(encoding='utf-8')
         check("Skill has frontmatter", content.startswith("---"))
-        check("Skill has Phases A-L", (f"Phase A" in content and f"Phase M" in content))
+        check("Skill has Phases A-M", "Phase A" in content and "Phase M" in content)
         check("Skill has Hard Gates table", "Hard Gates" in content)
         check("Skill references references/", "references/" in content)
         check("Skill has resource-root discovery", "MASTER_DESIGN_ROOT" in content)
@@ -137,7 +118,6 @@ def main():
                 print(f"  - {c['name']}")
         return 1
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main())
-
 
