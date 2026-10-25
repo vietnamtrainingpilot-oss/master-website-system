@@ -2,32 +2,42 @@
 type: skill
 description: "Master Website â€” Autonomous full-stack website production from brief to deployable HTML/CSS/JS/video. Synthesized playbooks with zero content loss from 169 skills + video pipeline."
 ---
-
 # /master-website â€” Complete Website Production System
 
 ## Purpose
-Build a complete, portable, autonomous website-production system that synthesizes all 169 skills from `D:\Master Design\skills\` into 13 actionable phase playbooks (Aâ€“M). Each phase is a coherent playbook with zero content loss â€” every technique, config table, example, banned default, spring preset, and workflow step from the source skills is preserved and organized for execution.
+Build a complete, portable, autonomous website-production system that synthesizes all 169 skills from `D:\Master Design\skills\` into 13 actionable phase playbooks (Aâ€“M). Each phase is a coherent playbook with zero content loss — every technique, config table, example, banned default, spring preset, and workflow step from the source skills is preserved and organized for execution.
+
+## ⚠️ REQUIRED READING ORDER
+**Before running any phase, you MUST read the following in order. This SKILL.md is the system prompt — it configures the agent behavior, and ALL referenced files must be loaded.**
+
+1. **`references/craft/`** — Universal craft rules (typography, color, anti-ai-slop, motion, etc.). Skill frontmatter `od.craft.requires` will inject only the needed sections.
+2. **`references/AGENTS.md` (root)** — Global rules, priorities, non-negotiable requirements, design-system discipline, visual quality standards, UX/content rules, build/implementation rules, accessibility/motion/interaction verification, and delivery rules. **This IS the system prompt — read first.**
+3. **`references/dials.json`** — Taste dials configuration (VARIANCE, MOTION, DENSITY).
+4. **Phase playbooks** — Read phases in order: A → B → C → D → E → F → G → H → I → J → K → L → M (skip M if not video).
+5. **Design system & template catalogs** — `references/design-systems/AGENTS.md` and `references/design-templates/AGENTS.md`.
+6. **Source skills** — `references/skills/` (169 skills for specific-task deep-dive).
+7. **Specialty guides** — `references/pptx-guide.md`, `references/docs-guide.md`, `references/brand-guide.md`, `references/animation-guide.md`, `references/video-guide.md`.
 
 ## Usage
 ```bash
 # Run the master skill
 /master-website
 
-# Or use the command
-master-website --project "My Website" --dials variance=50 motion=40 density=30
+# Or use the command with options
+master-website --project "My Website" --design_system editorial --template web-prototype --framework nextjs --dials variance=50 motion=40 density=30
 ```
 
-## Phase Playbooks (13)
+## Phase Playbooks (13 Phases A-M)
 
 | Phase | File | Size | Focus |
 |-------|------|------|-------|
 | A | `references/phase-a-intake.md` | ~3 KB | Design Read, taste dials, skills discovery |
 | B | `references/phase-b-research.md` | ~2 KB | Web clone recon, asset harvest, source verification |
-| C | `references/phase-c-design-direction.md` | ~9 KB | **Core** â€” Dials, anti-defaults, design system map, tokens |
+| C | `references/phase-c-design-direction.md` | ~9 KB | **Core** — Dials, anti-defaults, design system map, tokens |
 | D | `references/phase-d-design-system.md` | ~5 KB | Tokenize, component specs, DESIGN.md, a11y baseline |
 | E | `references/phase-e-template.md` | ~4 KB | Template selection, init, content mapping, assets |
 | F | `references/phase-f-implement.md` | ~6 KB | Phased impl, React/backend patterns, perf budgets, TDD |
-| G | `references/phase-g-animation.md` | ~6 KB | **Core** â€” Build sequence, 10 standards, component patterns |
+| G | `references/phase-g-animation.md` | ~6 KB | **Core** — Build sequence, 10 standards, component patterns |
 | H | `references/phase-h-engineering.md` | ~5 KB | A11y audit, perf optimization, security, code quality |
 | I | `references/phase-i-browser.md` | ~1 KB | Browser QA: visual regression, CWV, a11y, interactions |
 | J | `references/phase-j-test.md` | ~1 KB | 6-phase verification loop, TDD enforcement |
@@ -35,7 +45,7 @@ master-website --project "My Website" --dials variance=50 motion=40 density=30
 | L | `references/phase-l-deliver.md` | ~4 KB | Ship-it pipeline, deploy, monitor, handoff |
 | **M** | `references/phase-m-video.md` | **~8 KB** | **Video creation/editing: HyperFrames, Remotion, captions** |
 
-## Specialty Guides
+## Specialty Guides (5)
 
 | Guide | Purpose |
 |-------|---------|
@@ -64,48 +74,49 @@ master-website --project "My Website" --dials variance=50 motion=40 density=30
 | M | Video Approved | `review-animations` + browser-qa + caption accuracy + platform specs | Return to G/F |
 
 ## Resource Root Discovery
+
 This skill operates from its installed location. Resource discovery:
 
 ```
 Resource Root: ~/.opencode/skills/master-website/
-â”œâ”€â”€ SKILL.md              # This file
-â”œâ”€â”€ references/
-â”‚   â”œâ”€â”€ phase-a-intake.md
-â”‚   â”œâ”€â”€ phase-b-research.md
-â”‚   â”œâ”€â”€ phase-c-design-direction.md
-â”‚   â”œâ”€â”€ phase-d-design-system.md
-â”‚   â”œâ”€â”€ phase-e-template.md
-â”‚   â”œâ”€â”€ phase-f-implement.md
-â”‚   â”œâ”€â”€ phase-g-animation.md
-â”‚   â”œâ”€â”€ phase-h-engineering.md
-â”‚   â”œâ”€â”€ phase-i-browser.md
-â”‚   â”œâ”€â”€ phase-j-test.md
-â”‚   â”œâ”€â”€ phase-k-fix.md
-â”‚   â”œâ”€â”€ phase-l-deliver.md
-â”‚   â”œâ”€â”€ phase-m-video.md
-â”‚   â”œâ”€â”€ pptx-guide.md
-â”‚   â”œâ”€â”€ docs-guide.md
-â”‚   â”œâ”€â”€ brand-guide.md
-â”‚   â”œâ”€â”€ animation-guide.md
-â”‚   â”œâ”€â”€ video-guide.md
-â”‚   â”œâ”€â”€ design-systems/
-â”‚   â”‚   â”œâ”€â”€ AGENTS.md       # 152 design systems catalog
-â”‚   â”‚   â””â”€â”€ _must-use-rules.md
-â”‚   â”œâ”€â”€ design-templates/
-â”‚   â”‚   â””â”€â”€ AGENTS.md       # 115 templates catalog
-â”‚   â”œâ”€â”€ skills/             # 169 source skills (for specific-task deep-dive)
-â”‚   â”œâ”€â”€ skills-phase-mapping.md
-â”‚   â”œâ”€â”€ source-attribution.md
-â”‚   â”œâ”€â”€ skill-integration-map.md
-â”‚   â”œâ”€â”€ template-selection-guide.md
-â”‚   â”œâ”€â”€ design-read-template.md
-â”‚   â”œâ”€â”€ dials.json
-â”‚   â”œâ”€â”€ decision-record-template.md
-â”‚   â””â”€â”€ hard-gates.md
-â””â”€â”€ docs/
-    â””â”€â”€ master-website/
-        â””â”€â”€ audit/
-            â””â”€â”€ source-audit-enhanced.jsonl  # 5,243 entries
+⚡ SKILL.md              # This file (system prompt)
+⚡ references/
+  ⚡ phase-a-intake.md
+  ⚡ phase-b-research.md
+  ⚡ phase-c-design-direction.md
+  ⚡ phase-d-design-system.md
+  ⚡ phase-e-template.md
+  ⚡ phase-f-implement.md
+  ⚡ phase-g-animation.md
+  ⚡ phase-h-engineering.md
+  ⚡ phase-i-browser.md
+  ⚡ phase-j-test.md
+  ⚡ phase-k-fix.md
+  ⚡ phase-l-deliver.md
+  ⚡ phase-m-video.md
+  ⚡ pptx-guide.md
+  ⚡ docs-guide.md
+  ⚡ brand-guide.md
+  ⚡ animation-guide.md
+  ⚡ video-guide.md
+  ⚡ design-systems/
+    ⚡ AGENTS.md       # 152 design systems catalog
+    ⚡ _must-use-rules.md
+  ⚡ design-templates/
+    ⚡ AGENTS.md       # 115 templates catalog
+  ⚡ skills/           # 169 source skills (for specific-task deep-dive)
+  ⚡ skills-phase-mapping.md
+  ⚡ source-attribution.md
+  ⚡ skill-integration-map.md
+  ⚡ template-selection-guide.md
+  ⚡ design-read-template.md
+  ⚡ dials.json
+  ⚡ decision-record-template.md
+  ⚡ hard-gates.md
+  ⚡ docs/
+    ⚡ master-website/
+      ⚡ audit/
+        ⚡ source-audit-enhanced.jsonl  # 5,243 entries
 ```
 
 ## Environment Configuration
@@ -123,7 +134,8 @@ export MOTION=40
 export DENSITY=30
 ```
 
-### Path Resolution
+### Path Resolution (Python)
+
 ```python
 import os
 from pathlib import Path
@@ -136,47 +148,52 @@ REFERENCES = SKILL_ROOT / 'references'
 
 ## Key Synthesized Content (Zero Loss)
 
-### Phase C â€” Design Direction (Core)
+### Phase C — Design Direction (Core)
 - **Three Taste Dials** (VARIANCE/MOTION/DENSITY) with full range tables from `taste-skill`
 - **30+ Banned LLM Defaults** with before/after examples from `taste-skill`
-- **Design System Map**: Color â†’ Typography â†’ Spacing â†’ Shadows â†’ Motion
+- **Design System Map**: Color → Typography → Spacing → Shadows → Motion
 - **Spring Config Table** with 5 presets from `emil-design-eng`
-- **Typography Scale** (Displayâ†’Caption) with weights, line heights, tracking from `high-end-visual-design`
+- **Typography Scale** (Display→Caption) with weights, line heights, tracking from `high-end-visual-design`
 - **Shadow System** (4 levels) with colored shadows from `emil-design-eng`
 - **Anti-Default Decisions** template (minimum 5 required)
 - **Design Direction Doc** template consuming Phase A/B
 
-### Phase G â€” Animation (Core)
-- **6-Step Build Sequence** (Frequency â†’ Tool â†’ Properties â†’ Easing â†’ Interruption â†’ Reduced Motion) from `animate`
+### Phase G — Animation (Core)
+- **6-Step Build Sequence** (Frequency → Tool → Properties → Easing → Interruption → Reduced Motion) from `animate`
 - **10 Non-Negotiable Standards** with before/after table from `review-animations`
 - **Component Motion Patterns** (Buttons, Popovers, Tooltips, Modals, Lists, Pages) from `emil-design-eng`, `motion-patterns`
 - **Spring Presets** (5 configs) from `emil-design-eng`
 - **Library Integration** (GSAP, Motion/React, CSS) with code examples
 - **Performance Budget** (16ms/frame, max 3 concurrent) from `fixing-motion-performance`
 
-### Phase M â€” Video Creation & Editing (New)
+### Phase M — Video Creation & Editing (New)
 - **Tool Selection Matrix** (HyperFrames vs Remotion vs FFmpeg) from `video-production` router
-- **HyperFrames Pipeline**: compose â†’ assets â†’ design â†’ animate â†’ preview â†’ render
-- **Remotion Pipeline**: init â†’ compose â†’ animate â†’ audio â†’ render
+- **HyperFrames Pipeline**: compose → assets → design → animate → preview → render
+- **Remotion Pipeline**: init → compose → animate → audio → render
 - **Asset Resolution** via `media-use` (BGM, voiceover, images, SFX)
 - **Captioning**: HyperFrames `<hf-captions>` + Remotion `remotion-captions`
 - **Platform Export**: TikTok/Reels/Shorts (9:16), YouTube (16:9), LinkedIn, Twitter/X, Web embed
 - **Hard Gates**: `review-animations` + `browser-qa` + caption accuracy + platform specs
 
-### Phase F â€” Implementation
+### Phase F — Implementation
 - **Phased Planning** with self-contained context briefs from `writing-plans`, `orch-*`
 - **React Patterns** (Server/Client components, parallel fetching) from `frontend-patterns`, `react-patterns`
 - **State Management Decision Tree** from `frontend-patterns`
 - **Backend Patterns** (API, DB, Auth, Infra) from 20+ backend skills
 - **Performance Budgets** (CWV targets, 70+ optimization rules) from `vercel-react-best-practices`
-- **6-Mode Polish Workflow** (Auditâ†’Tightenâ†’Hardenâ†’Animateâ†’Liveâ†’Ship) from `impeccable-design-polish`
+- **6-Mode Polish Workflow** (Audit→Tighten→Harden→Animate→Live→Ship) from `impeccable-design-polish`
 
-### Phase H â€” Engineering
+### Phase H — Engineering
 - **WCAG 2.2 AA Checklist** (47 items across POUR) from `accessibility`, `frontend-a11y`
 - **Core Web Vitals Optimization** (8 categories, 70+ rules) from `vercel-react-best-practices`
 - **Security Hardening** (deps, code, auth, headers) from `security`, `security-review`
 - **Code Quality** (Ponytail YAGNI, TypeScript strict, linting) from `ponytail-*`, `coding-standards`
 - **Generic Site Audit** (6-phase) from `generic-site-auditor`
+
+### Phase J — Verification Loop
+- **6-Phase Verification** (build → type → lint → test → security → diff) from `verification-loop`
+- **TDD Enforcement** — write failing test first, implement smallest change to green, then refactor
+- **Coverage Enforcement** — 80%+ minimum across unit/integration/E2E
 
 ## Video-Specific Template Pulling
 
@@ -191,24 +208,37 @@ For video tasks, pull from `references/design-templates/design-templates/`:
 | `web-prototype/` | If video embeds in website |
 | `saas-landing/` | If video is hero on landing page |
 
-## Validation
-```bash
-python validate.py
-```
-Expected: 30/30 structural checks PASS.
+## Live OpenCode Skills Used
 
-## Distribution
-Copy `master-website-system/` to any machine. Run `install.ps1` to install locally.
+The skill invokes these installed skills (must be present in `~/.config/opencode/skills/`):
 
-## Source
-Synthesized from 169 skills in `D:\Master Design\skills\` with zero content loss â€” every technique, config, example, and workflow preserved in actionable playbook form. Video pipeline adds Phase M with 20+ video skills.
+| Skill | Purpose |
+|-------|---------|
+| `brainstorming` | Design read, dials, approach selection, design doc gate |
+| `design-taste-frontend` | Taste authority: dials, design-system map, anti-slop rules |
+| `frontend-design` | Stack defaults (React/Next, Tailwind v4, Motion) |
+| `emil-design-eng` | Component/motion philosophy, animation decision framework |
+| `review-animations` | Hard animation gate (10 standards, Block/Approve) |
+| `animate` | Animation build sequence, recipes |
+| `browser-qa` | Playwright QA: console, CWV, forms, screenshots, axe |
+| `verification-loop` | 6-phase verification (build, type, lint, test, security, diff) |
+| `generic-site-auditor` | 6-phase audit (Visual, Copy, Layout, Motion, Technical) |
+| `frontend-a11y` | WCAG 2.2 AA patterns for React/Next.js |
+| `vercel-react-best-practices` | 70+ perf rules from Vercel Engineering |
+| `ultimate-frontend-skills` | House style fallback, engines (gradient.js, depth.js, etc.) |
+| `impeccable-design-polish` | Post-gen audit, critique, polish, harden |
+| `systematic-debugging` | Bug diagnosis before fixes |
+| `ship-it` | End-to-end delivery coordination |
+| `svg-creator` | SVG asset creation, background props, patterns |
+| `pixabay-fetcher` | High-quality free image fetching from Pixabay |
+| `agent-spawner` | Sub-agent architecture for parallel execution |
 
 ## Integration Summary
 
 | Metric | Value |
 |--------|-------|
 | Total Skills Synthesized | 169 |
-| Phase Playbooks | 13 (Aâ€“M) |
+| Phase Playbooks | 13 (A–M) |
 | Specialty Guides | 5 (pptx, docs, brand, animation, video) |
 | Design Systems Cataloged | 152 (via AGENTS.md) |
 | Templates Cataloged | 115 (via AGENTS.md) |
@@ -218,4 +248,6 @@ Synthesized from 169 skills in `D:\Master Design\skills\` with zero content loss
 
 ---
 
-*All substantive instructional content has been synthesized into phase playbooks with zero loss â€” organized for execution, not archival. Video pipeline (Phase M) extends the 12-phase pipeline for video deliverables; skip if not needed.*
+*All substantive instructional content has been synthesized into phase playbooks with zero loss — organized for execution, not archival. Video pipeline (Phase M) extends the 13-phase pipeline for video deliverables; skip if not needed.*
+
+**Critical**: Read `references/craft/` and `references/AGENTS.md` (root) before any phase. These are the system prompts that govern agent behavior. The `od.craft.requires` frontmatter on invoked skills will selectively inject only the needed craft sections.
