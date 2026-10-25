@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "description": "Three dials from taste-skill (design-taste-frontend). Set by brainstorming in Phase A.",
+  "dials": {
+    "DESIGN_VARIANCE": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 8,
+      "description": "1 = Perfect Symmetry, 10 = Artsy Chaos. Controls layout asymmetry, type scale contrast, whitespace variance."
+    },
+    "MOTION_INTENSITY": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 6,
+      "description": "1 = Static, 10 = Cinematic/Physics. Controls animation complexity, scroll choreography, micro-interactions."
+    },
+    "VISUAL_DENSITY": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 4,
+      "description": "1 = Art Gallery/Airy, 10 = Cockpit/Packed Data. Controls section spacing, card usage, content density."
+    }
+  },
+  "baseline": { "DESIGN_VARIANCE": 8, "MOTION_INTENSITY": 6, "VISUAL_DENSITY": 4 },
+  "inferenceTable": {
+    "signals": [
+      { "signal": "minimalist / clean / calm / editorial / Linear-style", "variance": "5-6", "motion": "3-4", "density": "2-3" },
+      { "signal": "premium consumer / Apple-y / luxury / brand", "variance": "7-8", "motion": "5-7", "density": "3-4" },
+      { "signal": "playful / wild / Dribbble / Awwwards / experimental / agency", "variance": "9-10", "motion": "8-10", "density": "3-4" },
+      { "signal": "landing page / portfolio / marketing site (default)", "variance": "7-9", "motion": "6-8", "density": "3-5" },
+      { "signal": "trust-first / public-sector / regulated / accessibility-critical", "variance": "3-4", "motion": "2-3", "density": "4-5" },
+      { "signal": "redesign - preserve", "variance": "match existing", "motion": "match+1", "density": "match existing" },
+      { "signal": "redesign - overhaul", "variance": "+2", "motion": "+2", "density": "match existing" }
+    ]
+  },
+  "useCasePresets": {
+    "Landing (SaaS, mainstream)": { "variance": 7, "motion": 6, "density": 4 },
+    "Landing (Agency / creative)": { "variance": 9, "motion": 8, "density": 3 },
+    "Landing (Premium consumer)": { "variance": 7, "motion": 6, "density": 3 },
+    "Portfolio (Designer / studio)": { "variance": 8, "motion": 7, "density": 3 },
+    "Portfolio (Developer)": { "variance": 6, "motion": 5, "density": 4 },
+    "Editorial / Blog": { "variance": 6, "motion": 4, "density": 3 },
+    "Public-sector service": { "variance": 3, "motion": 2, "density": 5 }
+  }
+}
